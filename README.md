@@ -1,6 +1,8 @@
-# Gipity Scaffold App
+# Gipity Scaffolding App
 
 <p align="center"><img src="assets/gipity-repo-banner.png" alt="Gipity Banner"></p>
+
+**[Studio clients](https://www.gipity.com): use the Gipity accounts to avoid this stage (does not include Testflight or Store distribution. supports 1 iPhone)**
 
 # 📌 Important: Pre-Launch
 
