@@ -6,7 +6,7 @@
 
 # 📌 Important: Pre-Launch
 
-**Initial Public Release:** v1.0.0-alpha • **Updated**: 5th August 2025 • **Author**: Steve Procter
+**Initial Public Release:** [see VERSION](./VERSION) • **Updated**: 5th August 2025 • **Author**: Steve Procter
 
 **Support/Guidance**: Discussions & Issues in [Github Repo](https://github.com/gipity/gipity-scaffold) • Alternative [@Gipity-Steve in Replit community](https://replit.discourse.group/u/gipity-steve)
 
