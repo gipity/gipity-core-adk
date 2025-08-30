@@ -322,6 +322,13 @@ if command -v npx >/dev/null 2>&1; then
         echo "⚠️ Warning: Android styles.xml not found"
     fi
     
+    # Copy Android styles-v31.xml for Android 15 support
+    if [ -f "$PROJECT_ROOT/android/app/src/main/res/values-v31/styles.xml" ]; then
+        mkdir -p "android/app/src/main/res/values-v31/" >/dev/null 2>&1
+        cp "$PROJECT_ROOT/android/app/src/main/res/values-v31/styles.xml" "android/app/src/main/res/values-v31/" || echo "❌ Error: Failed to copy Android styles-v31.xml"
+        replace_template_tokens "android/app/src/main/res/values-v31/styles.xml"
+        echo "✅ Android styles-v31.xml copied"
+    fi
 
     
     # Copy iOS Info.plist

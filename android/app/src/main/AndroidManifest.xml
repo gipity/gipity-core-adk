@@ -22,7 +22,9 @@
             android:launchMode="singleTask"
             android:name="{{APP_ID}}.MainActivity"
             android:theme="@style/AppTheme.NoActionBarLaunch"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustNothing"
+            android:windowLayoutInDisplayCutoutMode="shortEdges"
+            android:enableOnBackInvokedCallback="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
