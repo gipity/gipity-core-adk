@@ -811,23 +811,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const extension = filePath.toLowerCase().split('.').pop();
         console.log(`🔍 Detected extension: ${extension} from path: ${filePath}`);
         switch (extension) {
+          // Images
           case 'png': return 'image/png';
           case 'jpg':
           case 'jpeg': return 'image/jpeg';
           case 'gif': return 'image/gif';
           case 'webp': return 'image/webp';
           case 'svg': return 'image/svg+xml';
-          default: return 'image/jpeg'; // fallback
+          case 'bmp': return 'image/bmp';
+          case 'ico': return 'image/x-icon';
+          
+          // Documents
+          case 'pdf': return 'application/pdf';
+          case 'doc': return 'application/msword';
+          case 'docx': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+          case 'xls': return 'application/vnd.ms-excel';
+          case 'xlsx': return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+          case 'ppt': return 'application/vnd.ms-powerpoint';
+          case 'pptx': return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+          case 'txt': return 'text/plain';
+          case 'rtf': return 'application/rtf';
+          
+          // Audio
+          case 'mp3': return 'audio/mpeg';
+          case 'wav': return 'audio/wav';
+          case 'ogg': return 'audio/ogg';
+          case 'm4a': return 'audio/mp4';
+          case 'flac': return 'audio/flac';
+          
+          // Video
+          case 'mp4': return 'video/mp4';
+          case 'avi': return 'video/x-msvideo';
+          case 'mov': return 'video/quicktime';
+          case 'wmv': return 'video/x-ms-wmv';
+          case 'webm': return 'video/webm';
+          
+          // Archives
+          case 'zip': return 'application/zip';
+          case 'rar': return 'application/vnd.rar';
+          case '7z': return 'application/x-7z-compressed';
+          case 'tar': return 'application/x-tar';
+          case 'gz': return 'application/gzip';
+          
+          // Web files
+          case 'html': return 'text/html';
+          case 'css': return 'text/css';
+          case 'js': return 'application/javascript';
+          case 'json': return 'application/json';
+          case 'xml': return 'application/xml';
+          
+          default: return 'application/octet-stream'; // generic binary
         }
       };
 
-      // Set appropriate headers for image response
+      // Set appropriate headers for file response
       const contentType = getContentType(path);
+      const fileName = path.split('/').pop(); // Extract filename from path
+
       res.setHeader('Content-Type', contentType);
       res.setHeader('Cache-Control', 'private, max-age=3600'); // Cache for 1 hour
       res.setHeader('Content-Length', fileData.size);
-      
-      console.log(`✅ Serving image: ${path} as ${contentType} (${fileData.size} bytes)`);
+
+      // Add Content-Disposition for non-image files to prompt download
+      if (!contentType.startsWith('image/')) {
+        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+      }
+
+      console.log(`✅ Serving file: ${path} as ${contentType} (${fileData.size} bytes)`);
       
       // Convert blob to buffer and send
       const bufferConversionStartTime = performance.now();
