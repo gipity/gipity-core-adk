@@ -3,7 +3,7 @@ import { useAuth } from '../lib/auth-context';
 import { getApiUrl } from '../lib/api';
 import { authenticatedFetch } from '../lib/authenticated-fetch';
 
-export const useAuthenticatedImage = (filePath: string | null) => {
+export const useAuthenticatedFile = (filePath: string | null) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,9 +26,9 @@ export const useAuthenticatedImage = (filePath: string | null) => {
       setImageUrl(null); // Clear previous image URL
 
       try {
-        const url = getApiUrl(`/api/file/images/${filePath}`);
+        const url = getApiUrl(`/api/file/files/${filePath}`);
         
-        const response = await authenticatedFetch(`/api/file/images/${filePath}`, {
+        const response = await authenticatedFetch(`/api/file/files/${filePath}`, {
           headers: {
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'

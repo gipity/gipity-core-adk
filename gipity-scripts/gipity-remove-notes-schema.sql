@@ -37,5 +37,5 @@ DROP TABLE IF EXISTS notes;
 -- Remove any comments/documentation
 -- (Comments are automatically removed with table drop)
 
--- Note: Storage bucket 'images' and related policies are kept
+-- Note: Storage bucket 'files' and related policies are kept
 -- as they may be useful for future features like profile photos

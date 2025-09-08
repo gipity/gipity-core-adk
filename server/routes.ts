@@ -578,7 +578,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         // 2. Photo is being replaced (new photo_path is different from current)
         try {
           console.log(`🗑️ Deleting old photo: ${currentPhotoPath}`);
-          await deleteFile('images', currentPhotoPath);
+          await deleteFile('files', currentPhotoPath);
           console.log(`✅ Old photo deleted successfully: ${currentPhotoPath}`);
         } catch (fileError) {
           console.error('Error deleting old photo:', fileError);
@@ -659,7 +659,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Delete the file from storage if it exists
       if (note.photo_path) {
         try {
-          await deleteFile('images', note.photo_path);
+          await deleteFile('files', note.photo_path);
         } catch (fileError) {
           console.error('Error deleting file:', fileError);
           // Continue with note deletion even if file deletion fails
@@ -749,7 +749,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Upload to Supabase storage
       const supabaseStartTime = performance.now();
       console.log(`🕐 SUPABASE UPLOAD START: ${(supabaseStartTime - uploadStartTime).toFixed(2)}ms elapsed`);
-      const uploadResult = await uploadFile('images', filePath, fileBuffer, contentType);
+      const uploadResult = await uploadFile('files', filePath, fileBuffer, contentType);
       const supabaseEndTime = performance.now();
       console.log(`🕐 SUPABASE UPLOAD END: ${(supabaseEndTime - supabaseStartTime).toFixed(2)}ms duration`);
       console.log(`🕐 SUPABASE UPLOAD TOTAL: ${(supabaseEndTime - uploadStartTime).toFixed(2)}ms elapsed`);
