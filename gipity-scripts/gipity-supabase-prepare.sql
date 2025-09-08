@@ -41,7 +41,7 @@
 -- WHAT THIS CREATES:
 --    - users table (linked to Supabase auth)
 --    - notes table (user content with photo support)  
---    - images storage bucket (public access)
+--    - files storage bucket (public access)
 --    - Security policies (RLS) for data protection
 --    - Admin verification functions
 --    - Performance indexes
@@ -202,50 +202,50 @@ CREATE POLICY "Users can delete their own notes" ON notes
 
 -- Documentation comments
 COMMENT ON TABLE notes IS 'User content with multimedia support (text + photos)';
-COMMENT ON COLUMN notes.photo_path IS 'Storage path for uploaded photos (stored in images bucket)';
+COMMENT ON COLUMN notes.photo_path IS 'Storage path for uploaded photos (stored in files bucket)';
 
 -- ===================================================================
 -- SECTION 4: STORAGE BUCKET (Image Uploads)
 -- ===================================================================
 
--- Create public images bucket for photo uploads
+-- Create public files bucket for photo uploads
 INSERT INTO storage.buckets (id, name, public) 
-VALUES ('images', 'images', true)
+VALUES ('files', 'files', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Clean up existing storage policies
-DROP POLICY IF EXISTS "Users can upload their own images" ON storage.objects;
-DROP POLICY IF EXISTS "Anyone can view images" ON storage.objects;
-DROP POLICY IF EXISTS "Users can update their own images" ON storage.objects;
-DROP POLICY IF EXISTS "Users can delete their own images" ON storage.objects;
+DROP POLICY IF EXISTS "Users can upload their own files" ON storage.objects;
+DROP POLICY IF EXISTS "Anyone can view files" ON storage.objects;
+DROP POLICY IF EXISTS "Users can update their own files" ON storage.objects;
+DROP POLICY IF EXISTS "Users can delete their own files" ON storage.objects;
 
 -- Storage security policies (users can only manage their own folders)
-CREATE POLICY "Users can upload their own images" ON storage.objects
+CREATE POLICY "Users can upload their own files" ON storage.objects
   FOR INSERT 
   TO authenticated
   WITH CHECK (
-    bucket_id = 'images' 
+    bucket_id = 'files' 
     AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
   );
 
-CREATE POLICY "Anyone can view images" ON storage.objects
+CREATE POLICY "Anyone can view files" ON storage.objects
   FOR SELECT 
   TO public
-  USING (bucket_id = 'images');
+  USING (bucket_id = 'files');
 
-CREATE POLICY "Users can update their own images" ON storage.objects
+CREATE POLICY "Users can update their own files" ON storage.objects
   FOR UPDATE 
   TO authenticated
   USING (
-    bucket_id = 'images' 
+    bucket_id = 'files' 
     AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
   );
 
-CREATE POLICY "Users can delete their own images" ON storage.objects
+CREATE POLICY "Users can delete their own files" ON storage.objects
   FOR DELETE 
   TO authenticated
   USING (
-    bucket_id = 'images' 
+    bucket_id = 'files' 
     AND (storage.foldername(name))[1] = (SELECT auth.uid()::text)
   );
 
