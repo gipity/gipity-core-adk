@@ -79,7 +79,7 @@ export const sendWelcomeEmail = async (email: string, name?: string) => {
             or
           </p>
           <div>
-            <a href="${process.env.VITE_BACKEND_URL || `https://${process.env.CUSTOM_DOMAIN}`}" 
+            <a href="${process.env.VITE_BACKEND_URL || process.env.CUSTOM_DOMAIN}" 
                style="background-color: #4299e1; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: 600; font-size: 16px;">
               Visit Web App
             </a>
