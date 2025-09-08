@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
 
 export interface EmailOptions {
   to: string;
+  cc?: string;
   subject: string;
   text?: string;
   html?: string;
@@ -23,6 +24,7 @@ export const sendEmail = async (options: EmailOptions) => {
     const mailOptions = {
       from: `${process.env.SMTP_SENDER_NAME || process.env.APP_NAME || 'Your App'} <${process.env.SMTP_SENDER_EMAIL}>`,
       to: options.to,
+      cc: options.cc,
       subject: options.subject,
       text: options.text,
       html: options.html
@@ -95,6 +97,7 @@ export const sendWelcomeEmail = async (email: string, name?: string) => {
 
   return sendEmail({
     to: email,
+    cc: process.env.SMTP_SENDER_EMAIL,
     subject: `Welcome to ${appName}!`,
     html
   });
