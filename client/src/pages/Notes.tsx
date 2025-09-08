@@ -14,7 +14,7 @@ import { Plus, Edit, Trash2, Camera, Image as ImageIcon, FileText, Star, PenTool
 import { CameraCapture, PhotoData } from '../components/CameraCapture';
 import { PhotoPreview } from '../components/PhotoPreview';
 import { Link } from 'wouter';
-import { useAuthenticatedImage } from '../hooks/useAuthenticatedImage';
+import { useAuthenticatedFile } from '../hooks/useAuthenticatedFile';
 import { Capacitor } from '@capacitor/core';
 import FloatingKeyboardHide from '../components/FloatingKeyboardHide';
 
@@ -23,7 +23,7 @@ const ExistingPhotoDisplay: React.FC<{
   photoPath: string;
   onRemove: () => void;
 }> = ({ photoPath, onRemove }) => {
-  const { imageUrl, loading, error } = useAuthenticatedImage(photoPath);
+  const { imageUrl, loading, error } = useAuthenticatedFile(photoPath);
 
   return (
     <div className="mb-4 p-3 border border-gray-200 rounded-lg bg-white dark:bg-gray-800">
