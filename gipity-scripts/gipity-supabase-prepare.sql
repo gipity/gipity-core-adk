@@ -35,8 +35,6 @@
 -- 4. After running this script, manually configure the storage bucket:
 --    - Go to Storage → Settings in Supabase dashboard
 --    - Ensure the storage bucket is set to public
---    - Set max upload file size: 5 MB
---    - Set allowed MIME types: image/*
 --
 -- WHAT THIS CREATES:
 --    - users table (linked to Supabase auth)
@@ -205,7 +203,7 @@ COMMENT ON TABLE notes IS 'User content with multimedia support (text + photos)'
 COMMENT ON COLUMN notes.photo_path IS 'Storage path for uploaded photos (stored in files bucket)';
 
 -- ===================================================================
--- SECTION 4: STORAGE BUCKET (Image Uploads)
+-- SECTION 4: STORAGE BUCKET (File Uploads)
 -- ===================================================================
 
 -- Create public files bucket for photo uploads
