@@ -39,14 +39,14 @@ export const Home: React.FC = () => {
             />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Gipity AI Dev Kit
+            Gipity AI Dev Kit (ADK) Demo
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Your native, web & PWA ADK - ready to go
+            Web, Native & PWA - all from a single codebase
           </p>
           {isAuthenticated() && user?.first_name && (
             <p className="text-lg text-gray-500 dark:text-gray-500 mt-2">
-              Welcome back, {user.first_name}
+              Welcome to the web demo, {user.first_name}
             </p>
           )}
         </div>
@@ -62,10 +62,10 @@ export const Home: React.FC = () => {
               </div>
             </div>
             <h2 className="text-3xl font-bold">
-              Launch your MVP in 30 days
+              The framework for vibe-coded apps
             </h2>
             <p className="text-blue-50 leading-relaxed text-lg max-w-2xl mx-auto">
-              Skip months of setup. This ADK gives you production-ready auth, database, file storage, and native mobile deployment—all configured and ready to extend.
+              Skip the blank page and wasted prompts. Start building with a tested foundation. This ADK gives you production-ready auth, database, file storage, and native mobile deployment—all configured and ready to extend.
             </p>
             <div className="flex justify-center pt-4">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30 px-4 py-2 text-sm">
