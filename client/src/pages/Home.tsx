@@ -109,6 +109,17 @@ export const Home: React.FC = () => {
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Everything you need to start building your app today
           </p>
+          <p className="text-lg text-gray-500 dark:text-gray-500 max-w-3xl mx-auto mt-3">
+            To see the full list of features visit the{' '}
+            <a 
+              href="https://www.gipity.com/core-adk" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#476A92] hover:text-[#3d5c82] underline"
+            >
+              Gipity website
+            </a>
+          </p>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">
