@@ -1,11 +1,16 @@
 # Changelog
 
-The purpose of this file is to record all changes to the ADK app, including minor version updates, pull requests, and releases/tags.
+The purpose of this file is to record all changes to the Gipity AI Dev Kit (ADK), including minor version updates, pull requests, and releases/tags.
 
 ## Relationship between CHANGELOG.md PROMPTLOG.md files
-PROMPTLOG.md contains useful AI agent prompts to fix and enhance the ADK app. The prompts will include some used during changes logged below. Remember that AI agent prompts aren't exact, and you should use them as a template for your own purposes, rather than as-is. Re-running prompts is not guaranteed to provide the same results.
+PROMPTLOG.md contains useful AI agent prompts to fix and enhance the Gipity AI Dev Kit (ADK). The prompts will include some used during changes logged below.
+
+*Remember that AI agent prompts aren't exact, and re-running prompts is not guaranteed to provide the same results each time. You should verify they do what you require, and use them as a template to be modified for your own purposes if needed.*
 
 ---
+
+## tag: [v1.0.0] — 9th September, 2025
+- Initial open-source public version for the world
 
 ## tag: [v1.0.0-beta] — 14th August, 2025
 - Allow/block access to production *.replit.app, based on new REPLIT_PROD_DOMAIN_ACCESS
