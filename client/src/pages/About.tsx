@@ -433,13 +433,10 @@ export const About: React.FC = () => {
           <CardContent className="pt-8 pb-8">
             <div className="text-center space-y-6">
               <h3 className="text-2xl font-bold text-[#476A92] dark:text-white">
-                Ready to start your MVP app?
+                Ready to start building your web or mobile app?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-                Get the Gipity ADK and join our support studio today
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 max-w-xl mx-auto">
-                Want to try the demo on your phone? Contact us for access to the Android APK file.
+                Get the Gipity AI Dev Kit (ADK) + Join our Support Hub
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
                 <Button className="bg-[#476A92] hover:bg-[#3d5c82] text-white px-8 py-4 text-lg font-medium" asChild>
