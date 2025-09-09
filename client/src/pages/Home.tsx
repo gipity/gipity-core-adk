@@ -39,10 +39,10 @@ export const Home: React.FC = () => {
             />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Gipity Scaffolding App
+            Gipity AI Dev Kit
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Your native, web & PWA scaffolding app - ready to go
+            Your native, web & PWA ADK - ready to go
           </p>
           {isAuthenticated() && user?.first_name && (
             <p className="text-lg text-gray-500 dark:text-gray-500 mt-2">
@@ -65,7 +65,7 @@ export const Home: React.FC = () => {
               Launch your MVP in 30 days
             </h2>
             <p className="text-blue-50 leading-relaxed text-lg max-w-2xl mx-auto">
-              Skip months of setup. This scaffold gives you production-ready auth, database, file storage, and native mobile deployment—all configured and ready to extend.
+              Skip months of setup. This ADK gives you production-ready auth, database, file storage, and native mobile deployment—all configured and ready to extend.
             </p>
             <div className="flex justify-center pt-4">
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30 px-4 py-2 text-sm">
@@ -215,7 +215,7 @@ export const Home: React.FC = () => {
                 Ready to start your MVP app?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-                Get the Gipity scaffolding app and join our support studio today
+                Get the Gipity ADK and join our support studio today
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500 max-w-xl mx-auto">
                 Want to try the demo on your phone? Contact us for access to the Android APK file.

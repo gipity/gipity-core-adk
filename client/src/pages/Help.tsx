@@ -21,9 +21,9 @@ export const Help: React.FC = () => {
               className="w-16 h-16"
             />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Gipity Scaffolding App</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Gipity AI Dev Kit</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Your native, web & PWA scaffolding app - ready to go
+            Your native, web & PWA ADK - ready to go
           </p>
         </div>
       </div>
@@ -37,7 +37,7 @@ export const Help: React.FC = () => {
                 Ready to build your MVP?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
-                Get the Gipity scaffolding app and join our support studio today
+                Get the Gipity ADK and join our support studio today
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500 max-w-xl mx-auto">
                 Want to try the demo on your phone? Contact us for access to the Android APK file.
