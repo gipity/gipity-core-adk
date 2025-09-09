@@ -3,7 +3,7 @@ import { usePlatform } from "./use-platform";
 
 /**
  * Hook for calculating content bottom padding based on real-world device measurements
- * Provides scaffold users with accurate padding for content areas above bottom navigation
+ * Provides ADK users with accurate padding for content areas above bottom navigation
  */
 export function useContentPadding() {
   const platform = usePlatform();

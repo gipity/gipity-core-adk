@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '../lib/auth-context';
 import { debug } from '../lib/debug';
 import { useToast } from '@/hooks/use-toast';
-// Reminder styles removed from clean scaffold
+// Reminder styles removed from clean ADK
 
 export const Signup: React.FC = () => {
   const [, setLocation] = useLocation();
@@ -187,7 +187,7 @@ export const Signup: React.FC = () => {
               {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword}</p>}
             </div>
 
-            {/* Reminder Style field removed from clean scaffold */}
+            {/* Reminder Style field removed from clean ADK */}
 
             <Button 
               type="submit" 

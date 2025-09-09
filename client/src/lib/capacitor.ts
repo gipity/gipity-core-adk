@@ -79,7 +79,7 @@ const loadSafeArea = async () => {
   }
 };
 
-// Clean mobile scaffold - core Capacitor functionality only
+// Clean mobile ADK - core Capacitor functionality only
 export const initializeCapacitor = async () => {
   debug.log('[Debug] initializeCapacitor() called');
   
