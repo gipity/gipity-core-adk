@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #==============================================================================
-# Gipity ADK - Mobile App Deployment Script
+# Gipity AI Dev Kit (ADK) - Mobile App Deployment Script
 #
 # Prepares mobile app build with dev/prod variants for Ionic Appflow
 #

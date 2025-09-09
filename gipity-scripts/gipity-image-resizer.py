@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 #==============================================================================
-# Gipity ADK - Image Asset Generator
+# Gipity AI Dev Kit (ADK) - Image Asset Generator
 #
 # Processes master images and generates all required sizes for multi-platform deployment
 #

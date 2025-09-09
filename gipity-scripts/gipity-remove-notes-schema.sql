@@ -1,5 +1,5 @@
 -- ==============================================================================
--- Gipity ADK - Supabase Setup
+-- Gipity AI Dev Kit (ADK) - Supabase Setup
 -- 
 -- Copyright (c) 2025 Gipity. Licensed under the MIT License.
 --
