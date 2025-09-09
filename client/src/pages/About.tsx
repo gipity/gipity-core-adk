@@ -21,14 +21,14 @@ export const About: React.FC = () => {
               className="w-16 h-16"
             />
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Gipity AI Dev Kit</h1>
+          <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">Gipity AI Dev Kit (ADK) Demo</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Your native, web & PWA ADK - ready to go
+            Web, Native & PWA - all from a single codebase
           </p>
           <div className="flex justify-center">
             <Badge className="bg-[#476A92] hover:bg-[#476A92]/80 text-white">
               <Star className="w-3 h-3 mr-1" />
-              v1.0.0-beta
+              v1.0.0
             </Badge>
           </div>
         </div>
