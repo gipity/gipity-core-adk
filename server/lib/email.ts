@@ -97,7 +97,7 @@ export const sendWelcomeEmail = async (email: string, name?: string) => {
 
   return sendEmail({
     to: email,
-    cc: process.env.SMTP_SENDER_EMAIL,
+    cc: process.env.APP_OWNER_EMAIL,
     subject: `Welcome to ${appName}!`,
     html
   });
