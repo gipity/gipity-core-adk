@@ -1,8 +1,8 @@
-# Contributing to Gipity Scaffold
+# Contributing to Gipity ADK
 
 Thanks for your interest in contributing!
 
-For the initial stages of this project, I’m focusing on building and refining the first few versions of the scaffold app myself. This helps ensure the architecture and approach are consistent before opening up wider collaboration.
+For the initial stages of this project, I’m focusing on building and refining the first few versions of the ADK app myself. This helps ensure the architecture and approach are consistent before opening up wider collaboration.
 
 ## Current Contribution Policy
 
@@ -29,7 +29,7 @@ Please use the **Discussions** tab on GitHub:
 
 ---
 
-Thanks for your interest in Gipity Scaffold — I really value your input, even if we’re not merging code just yet.
+Thanks for your interest in Gipity ADK — I really value your input, even if we’re not merging code just yet.
 
 ---
 

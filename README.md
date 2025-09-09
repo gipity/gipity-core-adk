@@ -1,4 +1,4 @@
-# Gipity Scaffolding App
+# Gipity AI Dev Kit (ADK)
 
 <p align="center"><img src="assets/gipity-repo-banner.png" alt="Gipity Banner"></p>
 
@@ -8,7 +8,7 @@
 
 **Initial Public Release:** [see VERSION](./VERSION) • **Updated**: 5th August 2025 • **Author**: Steve Procter
 
-**Support/Guidance**: Discussions & Issues in [Github Repo](https://github.com/gipity/gipity-scaffold) • Alternative [@Gipity-Steve in Replit community](https://replit.discourse.group/u/gipity-steve)
+**Support/Guidance**: Discussions & Issues in [Github Repo](https://github.com/gipity/gipity-core-adk) • Alternative [@Gipity-Steve in Replit community](https://replit.discourse.group/u/gipity-steve)
 
 **Non-Support Discussions**: [steve@gipity.com](mailto:steve@gipity.com) • [LinkedIn](https://www.linkedin.com/in/stephencharlesprocter)
 
@@ -28,7 +28,7 @@
 
 ## **Clarification on documentation, including this readme**
 
-This **Readme document** and the **replit.md instruction file** are the key documents to understanding the ***Gipity*** scaffold app.
+This **Readme document** and the **replit.md instruction file** are the key documents to understanding the ***Gipity*** ADK app.
 
 However, the current versions were written by *Replit agent* as placeholders. They are only intended at this time to give a flavour, and may not be accurate. They have not been read, reviewed or verified by any human *Gipity* eyes.
 
@@ -42,7 +42,7 @@ This project is MIT licensed. Please also read the [Gipity Usage Policy](./GIPIT
 
 ---
 
-# 🚀 Production-Ready Mobile App Scaffold
+# 🚀 Production-Ready Mobile App ADK
 
 **Build cross-platform mobile applications in hours, not weeks.** A complete foundation for React + Capacitor + Express + Supabase applications with built-in authentication, multimedia handling, and native mobile deployment.
 
@@ -61,8 +61,8 @@ This project is MIT licensed. Please also read the [Gipity Usage Policy](./GIPIT
 
 ### 1. **Clone & Setup**
 ```bash
-git clone https://github.com/your-username/gipity-scaffold
-cd gipity-scaffold
+git clone https://github.com/your-username/gipity-core-adk
+cd gipity-core-adk
 npm install
 ```
 
@@ -480,14 +480,14 @@ Need guidance beyond this documentation? Join our **Gipity Community Studio** fo
 Visit [gipity.com/community](https://gipity.com/community) for access details.
 
 ### **Open Source Contributions**
-This scaffold is open source and welcomes contributions:
+This ADK is open source and welcomes contributions:
 - Report issues on GitHub
 - Submit feature requests
 - Share your customizations with the community
 - Contribute documentation improvements
 
 ### **Success Stories**
-Share your apps built with this scaffold! Tag us on social media or submit to our showcase gallery.
+Share your apps built with this ADK! Tag us on social media or submit to our showcase gallery.
 
 ---
 
@@ -511,6 +511,6 @@ Share your apps built with this scaffold! Tag us on social media or submit to ou
 
 ---
 
-**Ready to build your next mobile app?** Start with the Quick Start section above and join thousands of developers using this scaffold to create production-ready applications.
+**Ready to build your next mobile app?** Start with the Quick Start section above and join thousands of developers using this ADK to create production-ready applications.
 
 ---

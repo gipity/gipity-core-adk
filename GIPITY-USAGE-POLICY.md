@@ -1,6 +1,6 @@
 # Gipity Usage Policy
 
-Welcome to the Gipity Scaffold — a free and open-source starter for building full-stack native + web apps with Replit AI Agent and Supabase.
+Welcome to the Gipity ADK — a free and open-source starter for building full-stack native + web apps with Replit AI Agent and Supabase.
 
 This project is licensed under the MIT License (see `/LICENSE`), which means you're free to use, modify, and distribute it, even commercially.
 
@@ -9,7 +9,7 @@ However, this repo is part of a broader ecosystem and business. To ensure fairne
 ---
 
 ## ✅ You *Can*:
-- Use this scaffold for your **own startup, side project, or business**
+- Use this ADK for your **own startup, side project, or business**
 - Fork, modify, or enhance it for **personal or commercial use**
 - Share improvements and contribute back if you like (PRs welcome!)
 - Credit Gipity with a link (optional, but appreciated)
@@ -17,7 +17,7 @@ However, this repo is part of a broader ecosystem and business. To ensure fairne
 ---
 
 ## 🚫 Please *Don't*:
-- **Resell or repackage this scaffold** as part of a commercial toolkit, template bundle, or paid product
+- **Resell or repackage this ADK** as part of a commercial toolkit, template bundle, or paid product
 - **Offer paid services** that bundle or clone this repo without significant changes
 - **Create a competing support service or studio** based on this codebase or branding
 - **Remove the README or strip Gipity references from the README** without credit or attribution

@@ -1,9 +1,9 @@
 # Changelog
 
-The purpose of this file is to record all changes to the scaffold app, including minor version updates, pull requests, and releases/tags.
+The purpose of this file is to record all changes to the ADK app, including minor version updates, pull requests, and releases/tags.
 
 ## Relationship between CHANGELOG.md PROMPTLOG.md files
-PROMPTLOG.md contains useful AI agent prompts to fix and enhance the scaffold app. The prompts will include some used during changes logged below. Remember that AI agent prompts aren't exact, and you should use them as a template for your own purposes, rather than as-is. Re-running prompts is not guaranteed to provide the same results.
+PROMPTLOG.md contains useful AI agent prompts to fix and enhance the ADK app. The prompts will include some used during changes logged below. Remember that AI agent prompts aren't exact, and you should use them as a template for your own purposes, rather than as-is. Re-running prompts is not guaranteed to provide the same results.
 
 ---
 
@@ -19,7 +19,7 @@ PROMPTLOG.md contains useful AI agent prompts to fix and enhance the scaffold ap
 ---
 
 ## tag: [v1.0.0-alpha] — 5th August, 2025
-- Initial release of the Gipity Scaffold
+- Initial release of the Gipity ADK
 - Build native (iOS/Android), web and PWA apps with Replit Agent
 - Supabase integrated for auth, data and file storage
 - JWT-protected APIs, RLS, and dev/prod switching
