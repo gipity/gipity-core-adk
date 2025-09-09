@@ -1,4 +1,4 @@
-# Contributing to Gipity ADK
+# Contributing to the Gipity AI Dev Kit (ADK)
 
 Thanks for your interest in contributing!
 
@@ -10,28 +10,21 @@ For the initial stages of this project, I’m focusing on building and refining 
   At this time, I’m unlikely to accept PRs directly into the repo. This is just so I can keep early development focused and cohesive.  
   If you have an idea or spot an issue, please start a discussion first (see below).
 
-- **Discussions:**  
-  GitHub Discussions are enabled — and I’m very happy for you to post:
-  - Ideas for enhancements
-  - Bug reports
-  - Suggestions for improvements
-  - Questions about the code
-
 - **Future Contributions:**  
   Once the early versions are stable, I’ll review how best to open up the repo for PRs. At that point, I’ll document coding style, branch workflows, and review process here.
 
-## How to Share Ideas
+## How to Share and Discuss Ideas
+For ideas for enhancements, bug reports, suggestions for improvements and questions about the code:
 
-Please use the **Discussions** tab on GitHub:
-- Start a new topic for your idea or feedback
-- Include as much detail as possible (screenshots, examples, reasoning)
-- Be constructive and respectful
+- Use the **Issues** tab on GitHub
+- Join the Gipity **Support Hub** at [www.gipity.com](https://www.gipity.com)
+- Email me at [steve@gipity.com](mailto:steve@gipity.com) - I welcome all conversations
 
 ---
 
-Thanks for your interest in Gipity ADK — I really value your input, even if we’re not merging code just yet.
+Thanks for your interest in the Gipity AI Dev Kit (ADK). I really value your input, even if we’re not merging code just yet.
 
 ---
 
 regards
-Steve Procter, Gipity founder • steve@gipity.com • https://www.gipity.com
+Steve Procter, Gipity founder, [steve@gipity.com](mailto:steve@gipity.com), [www.gipity.com](https://www.gipity.com)
