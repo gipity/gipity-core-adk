@@ -1,0 +1,2 @@
+Base repo: gipity-core-adk2
+Cloned at: 2025-09-09 17:00:28
