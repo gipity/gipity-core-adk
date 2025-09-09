@@ -1,10 +1,10 @@
 -- ==============================================================================
--- Gipity Scaffold - Supabase Setup
+-- Gipity ADK - Supabase Setup
 -- 
 -- Copyright (c) 2025 Gipity. Licensed under the MIT License.
 --
--- This script is part of the Gipity Scaffold:
--- https://github.com/gipity/gipity-scaffold
+-- This script is part of the Gipity ADK:
+-- https://github.com/gipity/gipity-core-adk
 --
 -- For additional support:
 -- https://www.gipity.com

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #==============================================================================
-# Gipity Scaffold - Mobile App Deployment Script
+# Gipity ADK - Mobile App Deployment Script
 #
 # Prepares mobile app build with dev/prod variants for Ionic Appflow
 #
 # Copyright (c) 2025 Gipity. Licensed under the MIT License.
 #
-# This script is part of the Gipity Scaffold:
-# https://github.com/gipity/gipity-scaffold
+# This script is part of the Gipity ADK:
+# https://github.com/gipity/gipity-core-adk
 #
 # For additional support:
 # https://www.gipity.com

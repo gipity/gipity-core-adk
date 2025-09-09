@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 #==============================================================================
-# Gipity Scaffold - Image Asset Generator
+# Gipity ADK - Image Asset Generator
 #
 # Processes master images and generates all required sizes for multi-platform deployment
 #
 # Copyright (c) 2025 Gipity. Licensed under the MIT License.
 #
-# This script is part of the Gipity Scaffold:
-# https://github.com/gipity/gipity-scaffold
+# This script is part of the Gipity ADK:
+# https://github.com/gipity/gipity-core-adk
 #
 # For additional support:
 # https://www.gipity.com
@@ -18,7 +18,7 @@
 #==============================================================================
 
 """
-INSTRUCTIONS: Gipity Scaffold Image Asset Generator
+INSTRUCTIONS: Gipity ADK Image Asset Generator
 
 This script processes master images and generates all required sizes for:
 - Web PWA icons and logos
@@ -747,7 +747,7 @@ def update_manifest_json():
 def main():
     """Main function - processes master images and generates all platform assets"""
     
-    print("Gipity Scaffold - Image Asset Generator")
+    print("Gipity ADK - Image Asset Generator")
     print("=" * 50)
     
     # Initialize total image counter
