@@ -1,5 +1,7 @@
 # Gipity AI Dev Kit (ADK)
 
+[![Star on GitHub](https://img.shields.io/github/stars/gipity/gipity-core-adk?style=social)](https://github.com/gipity/gipity-core-adk/stargazers)
+
 <p align="center">  <a href="https://www.gipity.com"><img src="assets/gipity-repo-banner.png" alt="Gipity Banner"></a></p>
 
 ## Project Overview
@@ -102,7 +104,12 @@ For building all apps:
 For building native mobile apps:
 - [Apple Developer Account](https://developer.apple.com) ($99/year) for iOS builds
 - [Google Play Developer Account](https://play.google.com/console) ($25 one-time) for Android builds
-- [Ionic Appflow](https://ionic.io/appflow) (Free tier / PAYG) for native app builds
+- [Ionic Appflow](https://ionic.io/appflow) (PAYG) for native app builds
+- Keychain Access (Free, built in to Macs) create Apple certificates
+- [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) (Free, Windows users) create Apple certificates
+- [Temurin](https://adoptium.net/en-GB/temurin/releases) (Free) create Android certificates
+- [UDID Tech](https://udid.tech) (Free) get your iPhone's UDID id
+- [Diawi](https://www.diawi.com) (Free) copy code to iPhone
 
 ---
 
