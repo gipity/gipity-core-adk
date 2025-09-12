@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useLocation } from 'wouter';
-import { useAuth } from '../lib/auth-context';
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+import { useAuth } from "../lib/auth";
 
 /**
  * Sets up the navigation callback for auth context to use client-side navigation
@@ -13,7 +13,7 @@ export const AuthNavigationSetup: React.FC = () => {
   useEffect(() => {
     // Set up the navigation callback to use wouter's client-side navigation
     setNavigationCallback(() => () => {
-      setLocation('/login');
+      setLocation("/login");
     });
 
     // Cleanup on unmount

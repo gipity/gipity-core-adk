@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Shield, Users, Settings, Database } from 'lucide-react';
-import { useLocation } from 'wouter';
-import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '@/lib/auth-context';
-import { debug } from '../../lib/debug';
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Shield } from "lucide-react";
+import { useLocation } from "wouter";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/lib/auth";
+import { debug } from "../../lib/debug";
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
@@ -21,17 +27,17 @@ export default function AdminDashboard() {
     try {
       // Check if user is authenticated and is admin
       if (!user) {
-        setLocation('/login');
+        setLocation("/login");
         return;
       }
 
-      if (user.user_type !== 'admin') {
-        setLocation('/');
+      if (user.user_type !== "admin") {
+        setLocation("/");
         return;
       }
     } catch (error) {
-      debug.error('Auth check failed:', error);
-      setLocation('/');
+      debug.error("Auth check failed:", error);
+      setLocation("/");
     } finally {
       setIsLoading(false);
     }
@@ -44,8 +50,12 @@ export default function AdminDashboard() {
   return (
     <div className="p-4 space-y-4">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Admin Dashboard</h1>
-        <p className="text-gray-600 dark:text-gray-400">Administrative control panel for managing the application.</p>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+          Admin Dashboard
+        </h1>
+        <p className="text-gray-600 dark:text-gray-400">
+          Administrative control panel for managing the application.
+        </p>
       </div>
 
       <Card>
@@ -64,23 +74,29 @@ export default function AdminDashboard() {
               <div className="text-lg">🟢</div>
               <div>
                 <h4 className="font-medium">Application Status</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">All systems operational and running normally.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  All systems operational and running normally.
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="text-lg">🔒</div>
               <div>
                 <h4 className="font-medium">Security</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Authentication and authorization systems active.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Authentication and authorization systems active.
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <div className="text-lg">💾</div>
               <div>
                 <h4 className="font-medium">Database</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Supabase connection healthy and responsive.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Supabase connection healthy and responsive.
+                </p>
               </div>
             </div>
           </div>
@@ -90,9 +106,7 @@ export default function AdminDashboard() {
       <Card>
         <CardHeader>
           <CardTitle>Admin Capabilities</CardTitle>
-          <CardDescription>
-            Available administrative functions
-          </CardDescription>
+          <CardDescription>Available administrative functions</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
@@ -112,7 +126,8 @@ export default function AdminDashboard() {
             </p>
             <div className="border-t pt-4">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Administrative functions are protected by role-based access control.
+                Administrative functions are protected by role-based access
+                control.
               </p>
             </div>
           </div>

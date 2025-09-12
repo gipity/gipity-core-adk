@@ -1,6 +1,6 @@
-import React from 'react';
-import { useAuth } from '../lib/auth-context';
-import { useLocation } from 'wouter';
+import React from "react";
+import { useAuth } from "../lib/auth";
+import { useLocation } from "wouter";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   React.useEffect(() => {
     if (!isLoading && !isAuthenticated()) {
-      setLocation('/login');
+      setLocation("/login");
     }
   }, [isAuthenticated, isLoading, setLocation]);
 
