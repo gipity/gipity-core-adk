@@ -1,26 +1,32 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { useAuth } from '../lib/auth-context';
-import { 
-  FileText, 
-  Camera, 
-  Smartphone, 
-  Zap, 
-  Shield, 
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "../lib/auth";
+import {
+  FileText,
+  Camera,
+  Smartphone,
+  Zap,
+  Shield,
   Rocket,
   ArrowRight,
   Star,
   Database,
   Globe,
   Code2,
-  Mail
-} from 'lucide-react';
-import { Link } from 'wouter';
-import iconImage from '../assets/icon-64x64.png';
-import icon2x from '../assets/icon-128x128.png';
-import icon3x from '../assets/icon-192x192.png';
+  Mail,
+} from "lucide-react";
+import { Link } from "wouter";
+import iconImage from "../assets/icon-64x64.png";
+import icon2x from "../assets/icon-128x128.png";
+import icon3x from "../assets/icon-192x192.png";
 
 export const Home: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
@@ -31,10 +37,10 @@ export const Home: React.FC = () => {
       <div className="text-center">
         <div className="max-w-3xl mx-auto">
           <div className="flex justify-center mb-6">
-            <img 
-              src={iconImage} 
+            <img
+              src={iconImage}
               srcSet={`${iconImage} 1x, ${icon2x} 2x, ${icon3x} 3x`}
-              alt="App Icon" 
+              alt="App Icon"
               className="w-16 h-16"
             />
           </div>
@@ -65,10 +71,16 @@ export const Home: React.FC = () => {
               The framework for vibe-coded apps
             </h2>
             <p className="text-blue-50 leading-relaxed text-lg max-w-2xl mx-auto">
-              Skip the blank page and wasted prompts. Start building with a tested foundation. This ADK gives you production-ready auth, database, file storage, and native mobile deployment—all configured and ready to extend.
+              Skip the blank page and wasted prompts. Start building with a
+              tested foundation. This ADK gives you production-ready auth,
+              database, file storage, and native mobile deployment—all
+              configured and ready to extend.
             </p>
             <div className="flex justify-center pt-4">
-              <Badge variant="secondary" className="bg-white/20 text-white border-white/30 px-4 py-2 text-sm">
+              <Badge
+                variant="secondary"
+                className="bg-white/20 text-white border-white/30 px-4 py-2 text-sm"
+              >
                 Web + iOS + Android Ready
               </Badge>
             </div>
@@ -110,10 +122,10 @@ export const Home: React.FC = () => {
             Everything you need to start building your app today
           </p>
           <p className="text-lg text-gray-500 dark:text-gray-500 max-w-3xl mx-auto mt-3">
-            To see the full list of features visit the{' '}
-            <a 
-              href="https://www.gipity.com/core-adk" 
-              target="_blank" 
+            To see the full list of features visit the{" "}
+            <a
+              href="https://www.gipity.com/core-adk"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-[#476A92] hover:text-[#3d5c82] underline"
             >
@@ -121,7 +133,7 @@ export const Home: React.FC = () => {
             </a>
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           <Card className="border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
             <CardContent className="pt-6">
@@ -130,13 +142,17 @@ export const Home: React.FC = () => {
                   <Shield className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Complete Authentication</h4>
-                  <p className="text-gray-600 dark:text-gray-400">JWT auth, user profiles, admin roles, and email confirmation</p>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    Complete Authentication
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    JWT auth, user profiles, admin roles, and email confirmation
+                  </p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
@@ -144,13 +160,18 @@ export const Home: React.FC = () => {
                   <Database className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Production Database</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Supabase database and file storage with RLS policies and security</p>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    Production Database
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Supabase database and file storage with RLS policies and
+                    security
+                  </p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
@@ -158,13 +179,18 @@ export const Home: React.FC = () => {
                   <Smartphone className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">iOS & Android Apps</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Native mobile deployment with Capacitor and Appflow integration</p>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    iOS & Android Apps
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Native mobile deployment with Capacitor and Appflow
+                    integration
+                  </p>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-start gap-4">
@@ -172,8 +198,13 @@ export const Home: React.FC = () => {
                   <Camera className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Native Camera Integration</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Capture photos with native mobile camera, web fallback included</p>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    Native Camera Integration
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Capture photos with native mobile camera, web fallback
+                    included
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -197,18 +228,31 @@ export const Home: React.FC = () => {
                   <Code2 className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-[#476A92] dark:text-white">Deploy everywhere</h3>
+              <h3 className="text-2xl font-bold text-[#476A92] dark:text-white">
+                Deploy everywhere
+              </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg max-w-2xl mx-auto">
-                One codebase, three platforms. Web deployment on Replit, native iOS/Android builds via Ionic Appflow—all configured and ready to go.
+                One codebase, three platforms. Web deployment on Replit, native
+                iOS/Android builds via Ionic Appflow—all configured and ready to
+                go.
               </p>
               <div className="flex flex-wrap justify-center gap-3 pt-4">
-                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2">
+                <Badge
+                  variant="outline"
+                  className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2"
+                >
                   Web (PWA)
                 </Badge>
-                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2">
+                <Badge
+                  variant="outline"
+                  className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2"
+                >
                   iOS Native
                 </Badge>
-                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2">
+                <Badge
+                  variant="outline"
+                  className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2"
+                >
                   Android Native
                 </Badge>
               </div>
@@ -229,17 +273,24 @@ export const Home: React.FC = () => {
                 Get the Gipity AI Dev Kit (ADK) + Join our Support Hub
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-                <Button className="bg-[#476A92] hover:bg-[#3d5c82] text-white px-8 py-4 text-lg font-medium" asChild>
-                  <a 
-                    href="https://www.gipity.com" 
-                    target="_blank" 
+                <Button
+                  className="bg-[#476A92] hover:bg-[#3d5c82] text-white px-8 py-4 text-lg font-medium"
+                  asChild
+                >
+                  <a
+                    href="https://www.gipity.com"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     <Globe className="w-5 h-5 mr-2" />
                     gipity.com
                   </a>
                 </Button>
-                <Button variant="outline" className="hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 px-8 py-4 text-lg font-medium" asChild>
+                <Button
+                  variant="outline"
+                  className="hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 px-8 py-4 text-lg font-medium"
+                  asChild
+                >
                   <a href="mailto:support@gipity.com">
                     <Mail className="w-5 h-5 mr-2" />
                     Got questions?

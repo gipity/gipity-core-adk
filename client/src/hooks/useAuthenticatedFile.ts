@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../lib/auth-context';
-import { getApiUrl } from '../lib/api';
-import { authenticatedFetch } from '../lib/authenticated-fetch';
+import { useState, useEffect } from "react";
+import { useAuth } from "../lib/auth";
+import { getApiUrl } from "../lib/api";
+import { authenticatedFetch } from "../lib/authenticated-fetch";
 
 export const useAuthenticatedFile = (filePath: string | null) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -27,33 +27,39 @@ export const useAuthenticatedFile = (filePath: string | null) => {
 
       try {
         const url = getApiUrl(`/api/file/files/${filePath}`);
-        
-        const response = await authenticatedFetch(`/api/file/files/${filePath}`, {
-          headers: {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
+
+        const response = await authenticatedFetch(
+          `/api/file/files/${filePath}`,
+          {
+            headers: {
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
+            },
+            cache: "no-store",
+            token,
           },
-          cache: 'no-store',
-          token,
-        }, handleTokenExpiration);
+          handleTokenExpiration,
+        );
 
         if (!response.ok) {
           if (response.isAuthError) {
             return;
           }
           const errorText = await response.text();
-          throw new Error(`Failed to load image: ${response.status} - ${errorText}`);
+          throw new Error(
+            `Failed to load image: ${response.status} - ${errorText}`,
+          );
         }
 
         const blob = await response.blob();
-        
+
         if (!isCancelled) {
           currentBlobUrl = URL.createObjectURL(blob);
           setImageUrl(currentBlobUrl);
         }
       } catch (err) {
         if (!isCancelled) {
-          setError(err instanceof Error ? err.message : 'Failed to load image');
+          setError(err instanceof Error ? err.message : "Failed to load image");
         }
       } finally {
         if (!isCancelled) {
@@ -73,7 +79,7 @@ export const useAuthenticatedFile = (filePath: string | null) => {
   // Cleanup blob URLs when imageUrl changes or component unmounts
   useEffect(() => {
     return () => {
-      if (imageUrl && imageUrl.startsWith('blob:')) {
+      if (imageUrl && imageUrl.startsWith("blob:")) {
         URL.revokeObjectURL(imageUrl);
       }
     };

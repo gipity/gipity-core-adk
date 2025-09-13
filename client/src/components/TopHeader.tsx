@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { Settings, LogOut, Terminal, User, Shield } from '@/lib/icons';
-import { Menu, X, Home as HomeIcon } from 'lucide-react';
-import { debug } from '@/lib/debug';
-import { Button } from '@/components/ui/button';
-import logoImage from '../assets/logo.png';
-import logo2x from '../assets/logo@2x.png';
-import logo3x from '../assets/logo@3x.png';
-import { 
+import { useState } from "react";
+import { Settings, LogOut, Terminal, User, Shield } from "@/lib/icons";
+import { Menu, X, Home as HomeIcon } from "lucide-react";
+import { debug } from "@/lib/debug";
+import { Button } from "@/components/ui/button";
+import logoImage from "../assets/logo.png";
+import logo2x from "../assets/logo@2x.png";
+import logo3x from "../assets/logo@3x.png";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import DebugConsole from './DebugConsole';
+} from "@/components/ui/dropdown-menu";
+import DebugConsole from "./DebugConsole";
 
-import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '../lib/auth-context';
-import { useLocation } from 'wouter';
-import { NavigationItems } from '@/components/NavigationItems';
-import { MAIN_NAVIGATION, AUTH_NAVIGATION } from '@shared/navigation-config';
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "../lib/auth";
+import { useLocation } from "wouter";
+import { NavigationItems } from "@/components/NavigationItems";
+import { MAIN_NAVIGATION, AUTH_NAVIGATION } from "@shared/navigation-config";
 
 export default function TopHeader() {
   const [showDebug, setShowDebug] = useState(false);
@@ -26,47 +26,47 @@ export default function TopHeader() {
   const { toast } = useToast();
   const { user, logout, isAuthenticated } = useAuth();
   const [, setLocation] = useLocation();
-  
+
   // Check if debug console should be shown (controlled by environment variable)
-  const isDebugConsoleEnabled = import.meta.env.VITE_SHOW_DEBUG_CONSOLE === 'true';
+  const isDebugConsoleEnabled =
+    import.meta.env.VITE_SHOW_DEBUG_CONSOLE === "true";
 
   const handleNotesClick = (e: React.MouseEvent) => {
     if (!isAuthenticated()) {
       e.preventDefault();
-      setLocation('/login');
+      setLocation("/login");
     } else {
-      setLocation('/notes');
+      setLocation("/notes");
     }
   };
 
   const handleLogout = () => {
-    debug.log('Logout button clicked');
+    debug.log("Logout button clicked");
     logout();
     toast({
       title: "Logged out",
       description: "You have been successfully logged out.",
       duration: 3000,
     });
-    setLocation('/');
+    setLocation("/");
   };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 safe-top">
-      
       <div className="flex items-center justify-between px-4 py-3 h-16">
         {/* Logo */}
-        <div 
+        <div
           className="flex items-center cursor-pointer hover:opacity-80 transition-opacity"
-          onClick={() => setLocation('/')}
+          onClick={() => setLocation("/")}
         >
-          <img 
-            src={logoImage} 
+          <img
+            src={logoImage}
             srcSet={`${logoImage} 1x, ${logo2x} 2x, ${logo3x} 3x`}
-            alt="App Logo" 
+            alt="App Logo"
             className="h-8"
           />
         </div>
-        
+
         {/* Header Actions */}
         <div className="flex items-center space-x-3 relative">
           {isAuthenticated() ? (
@@ -97,7 +97,7 @@ export default function TopHeader() {
                   )}
                 </Button>
               </div>
-              
+
               {/* Settings Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -111,7 +111,7 @@ export default function TopHeader() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   {user && (
-                    <DropdownMenuItem 
+                    <DropdownMenuItem
                       disabled={true}
                       className="text-sm font-medium text-gray-700 mb-2"
                     >
@@ -119,17 +119,17 @@ export default function TopHeader() {
                     </DropdownMenuItem>
                   )}
                   {user && (
-                    <DropdownMenuItem 
-                      onClick={() => setLocation('/profile')}
+                    <DropdownMenuItem
+                      onClick={() => setLocation("/profile")}
                       className="flex items-center space-x-2"
                     >
                       <User className="w-4 h-4" />
                       <span>User Profile</span>
                     </DropdownMenuItem>
                   )}
-                  {user && user.user_type === 'admin' && (
-                    <DropdownMenuItem 
-                      onClick={() => setLocation('/admin-dashboard')}
+                  {user && user.user_type === "admin" && (
+                    <DropdownMenuItem
+                      onClick={() => setLocation("/admin-dashboard")}
                       className="flex items-center space-x-2"
                     >
                       <Shield className="w-4 h-4" />
@@ -137,7 +137,7 @@ export default function TopHeader() {
                     </DropdownMenuItem>
                   )}
                   {isDebugConsoleEnabled && (
-                    <DropdownMenuItem 
+                    <DropdownMenuItem
                       onClick={() => setShowDebug(true)}
                       className="flex items-center space-x-2"
                     >
@@ -145,7 +145,7 @@ export default function TopHeader() {
                       <span>Debug Console</span>
                     </DropdownMenuItem>
                   )}
-                  <DropdownMenuItem 
+                  <DropdownMenuItem
                     onClick={handleLogout}
                     className="flex items-center space-x-2 text-red-600 hover:text-red-700"
                   >
@@ -203,7 +203,7 @@ export default function TopHeader() {
                 onClose={() => setShowMobileMenu(false)}
                 handlers={{ handleNotesClick }}
               />
-              
+
               {!isAuthenticated() && (
                 <NavigationItems
                   items={AUTH_NAVIGATION}
@@ -219,7 +219,10 @@ export default function TopHeader() {
 
       {/* Debug Console - only render if enabled */}
       {isDebugConsoleEnabled && (
-        <DebugConsole isOpen={showDebug} onToggle={() => setShowDebug(!showDebug)} />
+        <DebugConsole
+          isOpen={showDebug}
+          onToggle={() => setShowDebug(!showDebug)}
+        />
       )}
     </header>
   );

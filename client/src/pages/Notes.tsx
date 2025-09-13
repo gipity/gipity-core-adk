@@ -1,22 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { useAuth } from '../lib/auth-context';
-import { debug } from '../lib/debug';
-import { noteApi } from '../lib/api';
-import { FileApi } from '../lib/file-api';
-import { useToast } from '@/hooks/use-toast';
-import { Note, CreateNote, UpdateNote } from '../../../shared/schema';
-import { Plus, Edit, Trash2, Camera, Image as ImageIcon, FileText, Star, PenTool, CheckCircle, RefreshCw } from 'lucide-react';
-import { CameraCapture, PhotoData } from '../components/CameraCapture';
-import { PhotoPreview } from '../components/PhotoPreview';
-import { Link } from 'wouter';
-import { useAuthenticatedFile } from '../hooks/useAuthenticatedFile';
-import { Capacitor } from '@capacitor/core';
-import FloatingKeyboardHide from '../components/FloatingKeyboardHide';
+import React, { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "../lib/auth";
+import { debug } from "../lib/debug";
+import { noteApi } from "../lib/api";
+import { FileApi } from "../lib/file-api";
+import { useToast } from "@/hooks/use-toast";
+import { Note, CreateNote, UpdateNote } from "../../../shared/schema";
+import {
+  Plus,
+  Trash2,
+  Camera,
+  Image as ImageIcon,
+  FileText,
+  Star,
+  CheckCircle,
+  RefreshCw,
+} from "lucide-react";
+import { CameraCapture, PhotoData } from "../components/CameraCapture";
+import { PhotoPreview } from "../components/PhotoPreview";
+import { useAuthenticatedFile } from "../hooks/useAuthenticatedFile";
+import { Capacitor } from "@capacitor/core";
+import FloatingKeyboardHide from "../components/FloatingKeyboardHide";
 
 // Component for displaying existing photo with authentication
 const ExistingPhotoDisplay: React.FC<{
@@ -87,16 +100,16 @@ export const Notes: React.FC = () => {
   const [pullDistance, setPullDistance] = useState(0);
   const touchStartY = useRef<number | null>(null);
   const scrollContainer = useRef<HTMLDivElement>(null);
-  
+
   // Form state
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load user's notes
   const loadNotes = async (showRefreshToast = false) => {
     if (!token) return;
-    
+
     try {
       const response = await noteApi.getAll(token, handleTokenExpiration);
       if (response.isAuthError) {
@@ -106,16 +119,16 @@ export const Notes: React.FC = () => {
         setNotes(response.notes);
       } else {
         toast({
-          title: 'Error loading notes',
-          description: response.error || 'Failed to load your notes',
-          variant: 'destructive',
+          title: "Error loading notes",
+          description: response.error || "Failed to load your notes",
+          variant: "destructive",
         });
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Unable to load notes. Please check your connection.',
-        variant: 'destructive',
+        title: "Error",
+        description: "Unable to load notes. Please check your connection.",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -130,22 +143,22 @@ export const Notes: React.FC = () => {
   // Pull to refresh handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     if (!Capacitor.isNativePlatform()) return;
-    
+
     const container = scrollContainer.current;
     if (!container || container.scrollTop > 0) return;
-    
+
     touchStartY.current = e.touches[0].clientY;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!Capacitor.isNativePlatform() || touchStartY.current === null) return;
-    
+
     const container = scrollContainer.current;
     if (!container || container.scrollTop > 0) return;
-    
+
     const currentY = e.touches[0].clientY;
     const deltaY = currentY - touchStartY.current;
-    
+
     if (deltaY > 0) {
       e.preventDefault();
       const maxPull = 80;
@@ -156,13 +169,13 @@ export const Notes: React.FC = () => {
 
   const handleTouchEnd = () => {
     if (!Capacitor.isNativePlatform() || touchStartY.current === null) return;
-    
+
     const threshold = 60;
     if (pullDistance > threshold && !isRefreshing) {
       setIsRefreshing(true);
       loadNotes(true);
     }
-    
+
     touchStartY.current = null;
     setPullDistance(0);
   };
@@ -179,43 +192,52 @@ export const Notes: React.FC = () => {
 
       // Upload photo if we have local photo data
       if (localPhotoData) {
-        const uploadResult = await FileApi.uploadFile(token, localPhotoData, handleTokenExpiration);
+        const uploadResult = await FileApi.uploadFile(
+          token,
+          localPhotoData,
+          handleTokenExpiration,
+        );
         if (uploadResult.isAuthError) {
           return;
         }
         if (uploadResult.success && uploadResult.filePath) {
           finalPhotoPath = uploadResult.filePath;
         } else {
-          throw new Error(uploadResult.error || 'Failed to upload photo');
+          throw new Error(uploadResult.error || "Failed to upload photo");
         }
       }
 
       const noteData: CreateNote = {
         title: title.trim(),
         content: content.trim(),
-        photo_path: finalPhotoPath
+        photo_path: finalPhotoPath,
       };
 
-      const response = await noteApi.create(token, noteData, handleTokenExpiration);
-      
+      const response = await noteApi.create(
+        token,
+        noteData,
+        handleTokenExpiration,
+      );
+
       if (response.isAuthError) {
         return;
       }
       if (response.success && response.note) {
-        setNotes(prev => [response.note!, ...prev]);
-        setTitle('');
-        setContent('');
+        setNotes((prev) => [response.note!, ...prev]);
+        setTitle("");
+        setContent("");
         setLocalPhotoData(null);
         setShowCreateForm(false);
       } else {
-        throw new Error(response.error || 'Failed to create note');
+        throw new Error(response.error || "Failed to create note");
       }
     } catch (error) {
-      debug.error('Note creation failed:', error);
+      debug.error("Note creation failed:", error);
       toast({
-        title: 'Creation failed',
-        description: error instanceof Error ? error.message : 'Failed to create note',
-        variant: 'destructive'
+        title: "Creation failed",
+        description:
+          error instanceof Error ? error.message : "Failed to create note",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -232,14 +254,18 @@ export const Notes: React.FC = () => {
 
       // Upload new photo if we have local photo data
       if (localPhotoData) {
-        const uploadResult = await FileApi.uploadFile(token, localPhotoData, handleTokenExpiration);
+        const uploadResult = await FileApi.uploadFile(
+          token,
+          localPhotoData,
+          handleTokenExpiration,
+        );
         if (uploadResult.isAuthError) {
           return;
         }
         if (uploadResult.success && uploadResult.filePath) {
           finalPhotoPath = uploadResult.filePath;
         } else {
-          throw new Error(uploadResult.error || 'Failed to upload photo');
+          throw new Error(uploadResult.error || "Failed to upload photo");
         }
       } else if (photoRemoved) {
         // Photo was explicitly removed - set to null to trigger deletion
@@ -252,33 +278,41 @@ export const Notes: React.FC = () => {
       const updates: UpdateNote = {
         title: title.trim(),
         content: content.trim(),
-        photo_path: finalPhotoPath
+        photo_path: finalPhotoPath,
       };
 
-      const response = await noteApi.update(token, editingNote.id, updates, handleTokenExpiration);
-      
+      const response = await noteApi.update(
+        token,
+        editingNote.id,
+        updates,
+        handleTokenExpiration,
+      );
+
       if (response.isAuthError) {
         return;
       }
       if (response.success && response.note) {
-        setNotes(prev => prev.map(note => 
-          note.id === editingNote.id ? response.note! : note
-        ));
+        setNotes((prev) =>
+          prev.map((note) =>
+            note.id === editingNote.id ? response.note! : note,
+          ),
+        );
         setEditingNote(null);
         setShowCreateForm(false);
-        setTitle('');
-        setContent('');
+        setTitle("");
+        setContent("");
         setLocalPhotoData(null);
         setPhotoRemoved(false);
       } else {
-        throw new Error(response.error || 'Failed to update note');
+        throw new Error(response.error || "Failed to update note");
       }
     } catch (error) {
-      debug.error('Note update failed:', error);
+      debug.error("Note update failed:", error);
       toast({
-        title: 'Update failed',
-        description: error instanceof Error ? error.message : 'Failed to update note',
-        variant: 'destructive'
+        title: "Update failed",
+        description:
+          error instanceof Error ? error.message : "Failed to update note",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -289,22 +323,27 @@ export const Notes: React.FC = () => {
     if (!token) return;
 
     try {
-      const response = await noteApi.delete(token, noteId, handleTokenExpiration);
-      
+      const response = await noteApi.delete(
+        token,
+        noteId,
+        handleTokenExpiration,
+      );
+
       if (response.isAuthError) {
         return;
       }
       if (response.success) {
-        setNotes(prev => prev.filter(note => note.id !== noteId));
+        setNotes((prev) => prev.filter((note) => note.id !== noteId));
       } else {
-        throw new Error(response.error || 'Failed to delete note');
+        throw new Error(response.error || "Failed to delete note");
       }
     } catch (error) {
-      debug.error('Note deletion failed:', error);
+      debug.error("Note deletion failed:", error);
       toast({
-        title: 'Deletion failed',
-        description: error instanceof Error ? error.message : 'Failed to delete note',
-        variant: 'destructive'
+        title: "Deletion failed",
+        description:
+          error instanceof Error ? error.message : "Failed to delete note",
+        variant: "destructive",
       });
     }
   };
@@ -316,26 +355,22 @@ export const Notes: React.FC = () => {
     setLocalPhotoData(null);
     setPhotoRemoved(false);
     setShowCreateForm(true);
-    setImageRefreshKey(prev => prev + 1);
+    setImageRefreshKey((prev) => prev + 1);
   };
 
   const cancelForm = () => {
     setShowCreateForm(false);
     setEditingNote(null);
-    setTitle('');
-    setContent('');
+    setTitle("");
+    setContent("");
     setLocalPhotoData(null);
     setPhotoRemoved(false);
   };
-
-
 
   const removePhoto = () => {
     setLocalPhotoData(null);
     setPhotoRemoved(true);
   };
-
-
 
   if (isLoading) {
     return (
@@ -345,16 +380,18 @@ export const Notes: React.FC = () => {
     );
   }
 
-
-
   if (showCreateForm) {
     return (
       <div className="p-4 space-y-4">
         <Card>
           <CardHeader>
-            <CardTitle>{editingNote ? 'Edit Note' : 'Create New Note'}</CardTitle>
+            <CardTitle>
+              {editingNote ? "Edit Note" : "Create New Note"}
+            </CardTitle>
             <CardDescription>
-              {editingNote ? 'Update your note' : 'Add a new note with optional photo'}
+              {editingNote
+                ? "Update your note"
+                : "Add a new note with optional photo"}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -370,9 +407,12 @@ export const Notes: React.FC = () => {
                 maxLength={100}
               />
             </div>
-            
+
             <div>
-              <label htmlFor="content" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="content"
+                className="block text-sm font-medium mb-2"
+              >
                 Content
               </label>
               <Textarea
@@ -385,26 +425,27 @@ export const Notes: React.FC = () => {
               />
             </div>
 
-
-
             {/* Photo Options Section */}
             <div className="border rounded-lg p-4 bg-[#476A92]/5 dark:bg-gray-800 border-[#476A92]/20">
               <div className="flex items-center gap-2 mb-3">
                 <ImageIcon className="w-4 h-4 text-[#476A92]" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {editingNote ? 'Update photo' : 'Add a photo to your note'}
+                  {editingNote ? "Update photo" : "Add a photo to your note"}
                 </span>
               </div>
-              
+
               {/* Show existing photo for editing */}
-              {editingNote && editingNote.photo_path && !localPhotoData && !photoRemoved && (
-                <ExistingPhotoDisplay
-                  key={`${editingNote.photo_path}-${imageRefreshKey}`}
-                  photoPath={editingNote.photo_path}
-                  onRemove={removePhoto}
-                />
-              )}
-              
+              {editingNote &&
+                editingNote.photo_path &&
+                !localPhotoData &&
+                !photoRemoved && (
+                  <ExistingPhotoDisplay
+                    key={`${editingNote.photo_path}-${imageRefreshKey}`}
+                    photoPath={editingNote.photo_path}
+                    onRemove={removePhoto}
+                  />
+                )}
+
               {/* Show local photo preview if we have new photo data */}
               {localPhotoData ? (
                 <PhotoPreview
@@ -417,7 +458,7 @@ export const Notes: React.FC = () => {
                 (!editingNote || !editingNote.photo_path || photoRemoved) && (
                   <CameraCapture
                     onPhotoCapture={(photoData) => {
-                      debug.log('📁 PHOTO CAPTURED: Setting localPhotoData');
+                      debug.log("📁 PHOTO CAPTURED: Setting localPhotoData");
                       setLocalPhotoData(photoData);
                     }}
                     disabled={isSubmitting}
@@ -427,21 +468,30 @@ export const Notes: React.FC = () => {
             </div>
 
             <div className="flex gap-2">
-              <Button 
+              <Button
                 onClick={editingNote ? handleEditNote : handleCreateNote}
                 disabled={isSubmitting || !title.trim() || !content.trim()}
                 className="flex-1 bg-[#476A92] hover:bg-[#3d5c82]"
               >
-                {isSubmitting ? 'Saving...' : (editingNote ? 'Update Note' : 'Create Note')}
+                {isSubmitting
+                  ? "Saving..."
+                  : editingNote
+                    ? "Update Note"
+                    : "Create Note"}
               </Button>
-              
-              <Button variant="outline" onClick={cancelForm} disabled={isSubmitting} className="hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100">
+
+              <Button
+                variant="outline"
+                onClick={cancelForm}
+                disabled={isSubmitting}
+                className="hover:bg-gray-50 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+              >
                 Cancel
               </Button>
             </div>
           </CardContent>
         </Card>
-        
+
         {/* Floating Keyboard Hide Button */}
         <FloatingKeyboardHide show={showCreateForm} />
       </div>
@@ -449,7 +499,7 @@ export const Notes: React.FC = () => {
   }
 
   return (
-    <div 
+    <div
       ref={scrollContainer}
       className="p-4 space-y-6 overflow-y-auto"
       onTouchStart={handleTouchStart}
@@ -457,23 +507,27 @@ export const Notes: React.FC = () => {
       onTouchEnd={handleTouchEnd}
       style={{
         transform: `translateY(${pullDistance}px)`,
-        transition: pullDistance === 0 ? 'transform 0.3s ease-out' : 'none'
+        transition: pullDistance === 0 ? "transform 0.3s ease-out" : "none",
       }}
     >
       {/* Pull to refresh indicator */}
       {pullDistance > 0 && (
-        <div 
+        <div
           className="flex items-center justify-center py-2 text-gray-500"
-          style={{ 
+          style={{
             opacity: Math.min(pullDistance / 60, 1),
-            transform: `translateY(-${Math.max(0, 60 - pullDistance)}px)`
+            transform: `translateY(-${Math.max(0, 60 - pullDistance)}px)`,
           }}
         >
-          <RefreshCw 
-            className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} 
+          <RefreshCw
+            className={`w-4 h-4 mr-2 ${isRefreshing ? "animate-spin" : ""}`}
           />
           <span className="text-sm">
-            {isRefreshing ? 'Refreshing...' : pullDistance > 60 ? 'Release to refresh' : 'Pull to refresh'}
+            {isRefreshing
+              ? "Refreshing..."
+              : pullDistance > 60
+                ? "Release to refresh"
+                : "Pull to refresh"}
           </span>
         </div>
       )}
@@ -481,13 +535,14 @@ export const Notes: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">My Demo Notes</h1>
-        <Button onClick={() => setShowCreateForm(true)} className="bg-[#476A92] hover:bg-[#3d5c82]">
+        <Button
+          onClick={() => setShowCreateForm(true)}
+          className="bg-[#476A92] hover:bg-[#3d5c82]"
+        >
           <Plus className="w-4 h-4 mr-2" />
           New Note
         </Button>
       </div>
-
-
 
       {/* Stats Overview */}
       <div className="grid grid-cols-3 gap-4">
@@ -497,7 +552,9 @@ export const Notes: React.FC = () => {
               <FileText className="w-4 h-4 text-[#476A92]" />
             </div>
             <div className="text-2xl font-bold">{notes.length}</div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Total Notes</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Total Notes
+            </div>
           </CardContent>
         </Card>
 
@@ -507,9 +564,11 @@ export const Notes: React.FC = () => {
               <Camera className="w-4 h-4 text-[#476A92]" />
             </div>
             <div className="text-2xl font-bold">
-              {notes.filter(note => note.photo_path).length}
+              {notes.filter((note) => note.photo_path).length}
             </div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">With Photos</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              With Photos
+            </div>
           </CardContent>
         </Card>
 
@@ -519,82 +578,93 @@ export const Notes: React.FC = () => {
               <Star className="w-4 h-4 text-[#476A92]" />
             </div>
             <div className="text-2xl font-bold">
-              {notes.filter(note => {
-                const noteDate = new Date(note.created_at);
-                const today = new Date();
-                return noteDate.toDateString() === today.toDateString();
-              }).length}
+              {
+                notes.filter((note) => {
+                  const noteDate = new Date(note.created_at);
+                  const today = new Date();
+                  return noteDate.toDateString() === today.toDateString();
+                }).length
+              }
             </div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Created Today</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Created Today
+            </div>
           </CardContent>
         </Card>
       </div>
 
-
-
       {/* Full Notes List Section */}
       <div id="full-notes-list" className="space-y-4">
+        <h2 className="text-xl font-semibold mb-4">All Notes</h2>
 
-      <h2 className="text-xl font-semibold mb-4">All Notes</h2>
-      
-      {notes.length === 0 ? (
-        <Card>
-          <CardContent className="p-8 text-center">
-            <div className="mb-4">
-              <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
-                <ImageIcon className="w-8 h-8 text-gray-400" />
+        {notes.length === 0 ? (
+          <Card>
+            <CardContent className="p-8 text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                  <ImageIcon className="w-8 h-8 text-gray-400" />
+                </div>
               </div>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">No notes yet</h3>
-            <p className="text-gray-600 mb-4">
-              Create your first note with optional photo attachment
-            </p>
-            <Button onClick={() => setShowCreateForm(true)} className="bg-[#476A92] hover:bg-[#3d5c82]">
-              <Plus className="w-4 h-4 mr-2" />
-              Create First Note
-            </Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="space-y-3">
-          {notes.map((note) => (
-            <Card key={note.id}>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between">
-                  <div 
-                    className="flex-1 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded p-2 -m-2 transition-colors"
-                    onClick={() => startEditing(note)}
-                  >
-                    <h3 className="font-semibold mb-1">{note.title}</h3>
-                    <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                      {note.content}
-                    </p>
-                    <div className="flex items-center gap-2 mb-1">
-                      {note.photo_path && (
-                        <Camera className="w-4 h-4 text-[#476A92]" />
-                      )}
-                      <div className="text-xs text-gray-400">
-                        {new Date(note.created_at).toLocaleDateString('en-GB')} at {new Date(note.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+              <h3 className="text-lg font-semibold mb-2">No notes yet</h3>
+              <p className="text-gray-600 mb-4">
+                Create your first note with optional photo attachment
+              </p>
+              <Button
+                onClick={() => setShowCreateForm(true)}
+                className="bg-[#476A92] hover:bg-[#3d5c82]"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Create First Note
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-3">
+            {notes.map((note) => (
+              <Card key={note.id}>
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between">
+                    <div
+                      className="flex-1 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded p-2 -m-2 transition-colors"
+                      onClick={() => startEditing(note)}
+                    >
+                      <h3 className="font-semibold mb-1">{note.title}</h3>
+                      <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                        {note.content}
+                      </p>
+                      <div className="flex items-center gap-2 mb-1">
+                        {note.photo_path && (
+                          <Camera className="w-4 h-4 text-[#476A92]" />
+                        )}
+                        <div className="text-xs text-gray-400">
+                          {new Date(note.created_at).toLocaleDateString(
+                            "en-GB",
+                          )}{" "}
+                          at{" "}
+                          {new Date(note.created_at).toLocaleTimeString(
+                            "en-GB",
+                            { hour: "2-digit", minute: "2-digit" },
+                          )}
+                        </div>
                       </div>
                     </div>
+
+                    <div className="flex gap-1 ml-4">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteNote(note.id)}
+                        className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
-                  
-                  <div className="flex gap-1 ml-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDeleteNote(note.id)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
