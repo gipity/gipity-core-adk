@@ -160,8 +160,8 @@ For building native mobile apps:
       - APPFLOW_REPO_URL: this should be the empty repo you setup that ends with "-appflow", e.g. `my-new-app-appflow`
       - APP_NAME: keep this short, it is what will appear on your mobile devices home screen (Note: it will automatically add `dev` to the end)
       - APP_ID: this must match what you setup in the Apple developer dashboard and conform to the format shown
-      - CUSTOM_DOMAIN: you must add `https://`. this is the long development URL in the Replit development environment. But switch it to the deployed URL in the deployment secrets (if you have your own bespoke domain use this, otherwise use the Replit deployed domain)
-      - PROD_BACKEND_URL: keep the placeholder value for now, as it will be updated later. do not add `https://`. This is always the deployed domain name, not the development one. If you have your own bespoke domain use this, otherwise use the Replit deployed domain
+      - CUSTOM_DOMAIN: you must add `https://`. this is the long development URL in the Replit development environment. But switch it to the deployed URL in the deployment secrets (if you have your own bespoke domain use this, otherwise use the Replit deployed domain). Ensure there is no `/` character at the end or the URL
+      - PROD_BACKEND_URL: keep the placeholder value for now, as it will be updated later. do not add `https://`. This is always the deployed domain name, not the development one. If you have your own bespoke domain use this, otherwise use the Replit deployed domain. Ensure there is no `/` character at the end or the URL
       - SUPABASE: keep these as the placeholder values for now, as they will be updated later
 
 ```bash
@@ -228,7 +228,7 @@ Steps 1 to 4 will setup a Supabase project to work alongside your Replit develop
       - Authentication -> Email: Configure settings to send emails via your own SMTP mail server. Set the `Minimal interval between emails being sent` to "5". If you do not have access to these details then use the Supabase emailing option instead for now, but note there are some restrictions with the throughput/volume of emails you can send
       - Authentication -> Signin/Providers: Ensure only `Email` is selected and its `Email OTP Expiration` setting is "3600"
       - Authentication -> Rate Limits: Set `Rate limit for sending emails` to "240"
-      - Authentication -> URL configuration: Set `Site URL` to be your long development URL from the Replit development environment, e.g. `https://LONG-URL.replit.dev`
+      - Authentication -> URL configuration: Set `Site URL` to be your long development URL from the Replit development environment, e.g. `https://LONG-URL.replit.dev`. Ensure there is no `/` character at the end or the URL
       - Authentication -> Users -> Add User -> Create new user: add your own email address together with a password you will login to your new app with. Ensure `Auto Confirm User` is ticked
 
 2. **Prepare and Run the Gipity AI Dev Kit (ADK) Setup SQL**
@@ -264,24 +264,28 @@ Steps 1 to 4 will setup a Supabase project to work alongside your Replit develop
    - Choose `[my-new-app]-appflow` in the repository list and click Next. Do not click New Build at this stage
 
 2. **Configure Ionic Appflow Environments**
-   - Create "Development" environment with variables:
-     ```
+   - Create "Development" environment with the variables shown below, and following these additional instructions:
+      - VITE_BACKEND_URL: ensure there is no `/` character at the end or the URL
+
+```bash
      VITE_APP_DESCRIPTION=This is my app description
      VITE_APP_NAME=AppName
      VITE_BACKEND_URL=https://long-replit-development-URL.replit.dev
      VITE_DO_CONSOLE_LOGGING=true
      VITE_SHOW_DEBUG_CONSOLE=true
-     ```
+```
 
-   - Create "Production" environment with variables:
-     ```
+   - Create "Production" environment with the variables shown below, and following these additional instructions:
+      - VITE_BACKEND_URL: ensure there is no `/` character at the end or the URL
+
+```bash
      NODE_ENV=production
      VITE_APP_DESCRIPTION=This is my app description
      VITE_APP_NAME=AppName
      VITE_BACKEND_URL=https://your-subdomain.replit.app
      VITE_DO_CONSOLE_LOGGING=true
      VITE_SHOW_DEBUG_CONSOLE=true
-     ```
+```
 
 4. **Add Ionic Appflow Signing Certificates**
    - Create Android "Android Dev+Prod" certificate: Add your `keystore` file, `yourappnamekey` alias and keystore password

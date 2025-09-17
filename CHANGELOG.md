@@ -2,12 +2,16 @@
 
 The purpose of this file is to record all changes to the Gipity AI Dev Kit (ADK), including minor version updates, pull requests, and releases/tags.
 
-## Relationship between CHANGELOG.md PROMPTLOG.md files
-PROMPTLOG.md contains useful AI agent prompts to fix and enhance the Gipity AI Dev Kit (ADK). The prompts will include some used during changes logged below.
+## Changes may consist of:
+- direct code modifications which can be dropped straight into apps
+- AI agent prompts which will bring about code changes
 
-*Remember that AI agent prompts aren't exact, and re-running prompts is not guaranteed to provide the same results each time. You should verify they do what you require, and use them as a template to be modified for your own purposes if needed.*
+*Remember that AI agent prompts aren't exact, and re-running prompts is not guaranteed to provide the same results each time. You should verify they do what you require, and use them as a template to be modified for your own purposes if needed. Always test your app after you have made changes.*
 
 ---
+
+## 17th September, 2025
+- Minor changes to documentation. No breaking changes
 
 ## tag: [v1.0.0] — 9th September, 2025
 - Initial open-source public version for the world
