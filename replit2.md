@@ -20,29 +20,18 @@
 - **Expert Recommendations**: Provide single best solutions rather than multiple options
 - **Investigation Freedom**: Investigate issues without asking permission, provide complete responses
 - **Mobile Testing**: User tests native apps on real devices, not web simulations - request assistance for native debugging
-- **Permission-Based Changes**: Discuss significant changes before implementing
-
-# User Preferences for Replit Agents to Follow
-- **App Deployment Control**: Never run prepare-appflow.sh - always ask user to execute it
-- **Auto-Generated Folders**: Never update files in gipity-appflow folder, but can examine output when needed
-- **Backend-Only Architecture**: Frontend exclusively uses backend APIs, never direct Supabase connections
-- **Database Schema Changes**: Provide SQL scripts but ask user to execute them in Supabase dashboard
-- **Expert Recommendations**: Provide single best solutions rather than multiple options
-- **Investigation Freedom**: Investigate issues without asking permission, provide complete responses
-- **Mobile Testing Assumption**: User tests native apps on real Android/iOS devices, not web simulations
-- **Native Debugging Support**: Request user assistance since native logs won't appear in Replit console
-- **Permission-Based Changes**: Only make changes after discussion and user confirmation
+- **Permission-Based Changes**: Discuss changes with the user and await their confirmation before implementing
 - **Script Modification Caution**: Discuss any prepare-appflow.sh modifications before implementing
-- **Supabase Integration**: Backend-only connections, frontend uses secure API endpoints exclusively
 
 # Important Instructions for AI Dev Kit (ADK) Users
 - **You are welcome to adjust the *Critical Instructions for Replit Agents* and *User Preferences for Replit Agents to Follow* sections above in alignment with your own preferred vibe building and workflow practices**
+- **Modify the sections below with extreme caution - advanced users only**
 
 ---
 
 # **Architecture Principles & Development Guidelines**
 
-**For New Chat Sessions**: Users should ask agents to read this section (and the full replit.md) at the start of each session to understand the ADK's architecture, principles, and constraints before beginning any development work.
+**For New Chat Sessions**: As an agent, you should read this section (and the full replit.md) at the start of each session to understand the ADK's architecture, principles, and constraints before beginning any development work.
 
 **For Ongoing Development**: Use these guidelines when making changes, adding features, or performing compliance audits to ensure the codebase maintains its security, scalability, and design integrity.
 
