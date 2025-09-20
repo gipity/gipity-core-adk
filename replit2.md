@@ -33,6 +33,111 @@
 
 ---
 
+# **Architecture Principles & Development Guidelines**
+
+**For New Chat Sessions**: Users should ask agents to read this section (and the full replit.md) at the start of each session to understand the ADK's architecture, principles, and constraints before beginning any development work.
+
+**For Ongoing Development**: Use these guidelines when making changes, adding features, or performing compliance audits to ensure the codebase maintains its security, scalability, and design integrity.
+
+## **Fundamental Architecture Constraints**
+
+### **🔐 Backend-Only Supabase Access**
+- **Frontend Isolation**: Frontend must never access Supabase directly for any operations (auth, database, storage)
+- **API-First Communication**: Frontend communicates exclusively with backend via API routes using `VITE_BACKEND_URL`
+- **Dual Client Architecture**: 
+  - Service role client (`server/lib/supabase.ts`) for all database and storage operations
+  - RLS-bypass client (`server/lib/database.ts`) for admin operations
+  - No anon key usage in production operations
+
+### **🛡️ Security & Authentication**
+- **JWT-Based Auth**: Backend issues signed JWTs on login, all protected routes verify JWT tokens
+- **Secret Management**: Environment secrets never exposed in frontend code or Vite-accessible files
+- **RLS Enforcement**: Row Level Security policies on all Supabase tables with proper service role bypass
+- **Origin Validation**: CORS configuration explicitly validates request sources for mobile and web
+
+### **📁 File & Storage Operations**
+- **Backend Proxy Pattern**: All file uploads routed through backend to Supabase storage buckets
+- **No Direct Storage Access**: Frontend never accesses Supabase storage directly
+- **User Isolation**: File storage organized with user-specific folder policies
+- **Signed URLs**: Temporary access via backend-generated signed URLs only
+
+### **🏗️ Project Structure & Dependencies**
+- **Clear Directory Separation**: `/client` for frontend, `/server` for backend, `/shared` for common types
+- **ES Module Consistency**: All backend files use `import`/`export` syntax, no CommonJS patterns
+- **No Direct Database Drivers**: Prohibited packages: `drizzle`, `prisma`, `pg` - use Supabase client only
+- **Type Safety**: Shared TypeScript types and Zod validation schemas in `/shared` directory
+
+## **Development Workflow Requirements**
+
+### **🗄️ Database Schema Changes**
+- **SQL File Generation**: When database schema changes are needed, create a new SQL file in `gipity-scripts/` directory
+- **Manual Execution**: All schema changes, policies, and triggers must be executed manually by user in Supabase dashboard
+- **User Instructions**: Always provide clear instructions for users to run the SQL file in their Supabase project
+- **No Automatic Execution**: Never run SQL automatically or attempt to modify database schema via code
+
+### **🔒 Row Level Security (RLS)**
+- **User Access Policies**: `auth.uid() = user_id` for user-owned data access
+- **Admin Role Policies**: Role-based access for admin users (`user_type = 'admin'`)
+- **Service Role Bypass**: Explicit bypass policies for backend operations
+- **Policy Isolation**: Clean separation between user and admin access patterns
+
+### **⚙️ Environment Configuration**
+- **Core Variables**: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` for database access
+- **Mobile Variables**: `APP_ID`, `APP_NAME`, `APP_SCHEME`, `APP_USER_AGENT` for app identity
+- **Development Variables**: Debug flags prefixed with `VITE_` for frontend access
+- **Production Variables**: `CUSTOM_DOMAIN`, `PROD_BACKEND_URL` for deployment
+
+## **Mobile & Cross-Platform Guidelines**
+
+### **📱 Native Integration**
+- **Capacitor Integration**: Native features with web fallbacks, no direct mobile Supabase access
+- **Platform Detection**: Dynamic loading of Capacitor plugins with graceful degradation
+- **Asset Generation**: Automated icon/logo generation for all platform densities
+- **Network Security**: Proper domain trust configuration for API communication
+
+### **🚀 Build & Deployment**
+- **Single Build Tool**: Vite handles all compilation, no parallel build systems
+- **Environment Switching**: Dynamic dev/prod configuration via environment variables
+- **Template Replacement**: Dynamic token substitution in mobile build scripts
+- **Quality Assurance**: Real device testing for mobile, cross-browser for web
+
+## **Compliance Verification**
+
+**Before implementing any changes**, verify:
+
+✅ **No direct Supabase imports in frontend code** (`client/src/**`)  
+✅ **All API calls use backend endpoints** (check for `VITE_BACKEND_URL` usage)  
+✅ **JWT verification on protected routes** (`server/routes.ts`)  
+✅ **Environment secrets properly isolated** (no secrets in frontend builds)  
+✅ **RLS policies active on all tables** (verify in Supabase dashboard)  
+✅ **File uploads proxy through backend** (no direct storage access)  
+✅ **ES module syntax consistency** (no `require()` in backend)  
+✅ **No prohibited dependencies** (check `package.json` for banned packages)  
+✅ **Database changes via SQL files** (new files in `gipity-scripts/` for user execution)  
+✅ **Mobile platform compatibility** (Capacitor plugins, safe area handling)
+
+## **Development Best Practices**
+
+### **🎯 Before Starting Work**
+1. Read this entire replit.md file to understand project architecture
+2. Review existing code patterns in similar components/features
+3. Understand the user's specific requirements and constraints
+4. Plan changes that align with ADK architectural principles
+
+### **🔄 During Development**
+1. Follow existing code conventions and patterns
+2. Use shared types and schemas from `/shared` directory
+3. Route all external service calls through backend APIs
+4. Test both web and mobile compatibility where applicable
+
+### **✅ Before Completion**
+1. Verify no architectural violations have been introduced
+2. Ensure all new environment variables are documented
+3. Test that changes work in both development and production modes
+4. Provide clear instructions for any manual setup steps required
+
+---
+
 # The Guide
 
 ## Architecture Principles
