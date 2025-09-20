@@ -82,3 +82,7 @@ args = "./gipity-scripts/gipity-appflow-prepare.sh prod"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 42239
+externalPort = 3000
