@@ -81,6 +81,61 @@
 - **Service Role Bypass**: Explicit bypass policies for backend operations
 - **Policy Isolation**: Clean separation between user and admin access patterns
 
+#### **RLS Policy Creation Guide - Supabase Optimized**
+When creating Row Level Security (RLS) policies for Supabase, always use this optimized pattern to avoid performance warnings:
+
+❌ **WRONG - Causes Supabase warnings:**
+```sql
+-- DON'T USE: Direct auth.uid() calls
+USING (user_id = auth.uid())
+WITH CHECK (user_id = auth.uid())
+```
+
+✅ **CORRECT - Optimized pattern:**
+```sql
+-- USE: Subquery format
+USING (user_id = (SELECT auth.uid()))
+WITH CHECK (user_id = (SELECT auth.uid()))
+```
+
+**Complete Policy Examples:**
+
+**User Ownership Policies:**
+```sql
+-- SELECT policy
+CREATE POLICY "Users can view their own records" ON table_name
+  FOR SELECT 
+  TO authenticated
+  USING (user_id = (SELECT auth.uid()));
+
+-- INSERT policy  
+CREATE POLICY "Users can insert their own records" ON table_name
+  FOR INSERT 
+  TO authenticated
+  WITH CHECK (user_id = (SELECT auth.uid()));
+
+-- UPDATE policy
+CREATE POLICY "Users can update their own records" ON table_name
+  FOR UPDATE 
+  TO authenticated
+  USING (user_id = (SELECT auth.uid()));
+```
+
+**Admin-Only Policies:**
+```sql
+CREATE POLICY "Only admins can manage records" ON table_name
+  FOR ALL
+  TO authenticated
+  USING ((SELECT user_type FROM users WHERE id = (SELECT auth.uid())) = 'admin');
+```
+
+**Key Rules:**
+- Always wrap `auth.uid()` in `(SELECT auth.uid())`
+- Use `USING` for SELECT/UPDATE/DELETE operations
+- Use `WITH CHECK` for INSERT operations
+- For admin checks, query the users table with the subquery pattern
+- This pattern prevents Supabase linter warnings and ensures optimal performance
+
 ### **⚙️ Environment Configuration**
 - **Core Variables**: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` for database access
 - **Mobile Variables**: `APP_ID`, `APP_NAME`, `APP_SCHEME`, `APP_USER_AGENT` for app identity
