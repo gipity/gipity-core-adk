@@ -217,6 +217,12 @@ CREATE POLICY "Only admins can manage records" ON table_name
 - **Origin Validation**: Backend validates request sources for mobile and web
 - **Backend-Only Database**: Service role key server-side only, frontend uses APIs
 
+### **Security Architecture**
+- **Layered Protection**: Authentication endpoints protected by Supabase rate limiting, Replit/GCP infrastructure, and optional Cloudflare proxy
+- **Supabase Auth Defense**: Built-in rate limiting on auth endpoints, configurable email limits with custom SMTP, input validation
+- **Optional Cloudflare Layer**: When DNS is proxied, provides DDoS protection, origin IP hiding, and advanced rate limiting capabilities (Cloudflare is recommended for DNS hosting)
+- **CAPTCHA Enhancement**: Supabase supports hCaptcha/Cloudflare Turnstile integration for additional bot protection (not currently implemented)
+
 ---
 
 ## Application Components
