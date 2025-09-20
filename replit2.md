@@ -14,6 +14,15 @@
 - **Follow user preferences**: Read and follow the *User Preferences for Replit Agents to Follow* section below
 
 # User Preferences for Replit Agents to Follow
+- **Read Architecture First**: Always review the "Architecture Principles & Development Guidelines" section before starting work
+- **Manual Execution Only**: Never run prepare-appflow.sh or database scripts - always ask user to execute them
+- **Auto-Generated Folders**: Never update files in gipity-appflow folder, but can examine output when needed  
+- **Expert Recommendations**: Provide single best solutions rather than multiple options
+- **Investigation Freedom**: Investigate issues without asking permission, provide complete responses
+- **Mobile Testing**: User tests native apps on real devices, not web simulations - request assistance for native debugging
+- **Permission-Based Changes**: Discuss significant changes before implementing
+
+# User Preferences for Replit Agents to Follow
 - **App Deployment Control**: Never run prepare-appflow.sh - always ask user to execute it
 - **Auto-Generated Folders**: Never update files in gipity-appflow folder, but can examine output when needed
 - **Backend-Only Architecture**: Frontend exclusively uses backend APIs, never direct Supabase connections
