@@ -24,12 +24,11 @@ Further details on the **Gipity AI Dev Kit (ADK)** and optional **Support Hub** 
 ## Quick Links  
 
 - [Features & Tech Stack](#features--tech-stack)  
+- [Getting Started](#-getting-started---a-complete-setup-guide)  
 - [Security Notes](#security-notes)  
 - [Support & Community](#support--community)  
 - [Contributing](#contributing)  
 - [License](#license--fair-use)  
-
-- [Getting Started](#-getting-started---a-complete-setup-guide)  
 
 ---
 
